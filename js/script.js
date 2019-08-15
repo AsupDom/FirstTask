@@ -52,6 +52,42 @@ function checkSavings() {
 	}
 }
 
+function detectLevel() {
+	console.log(appData.budjet);
+	switch(true) {
+		case(appData.budjet < 1000):
+			console.log("У Вас низкий уровень бюджета");
+			break;
+		case(appData.budjet < 2000):
+			console.log("У Вас средний уровень бюджета");
+			break;
+		case(appData.budjet > 2000):
+			console.log("У Вас высокий уровень бюджета");
+			break;
+		default:
+			console.log("Что-то пошло не так");
+	}
+}
+
+function chooseOptExpenses() {
+	let question = "",
+		answer = "";
+
+	for (let i = 1; i < 4; i++) {
+		question = prompt("Статья необязательных расходов?", "");
+		answer = prompt("Ответ на вопрос","");
+
+		if ( (typeof(question) === 'string') && (typeof(question) != null) && (question != "") &&
+		(typeof(answer) === 'string') && (typeof(answer) != null) && (answer !="") ) {
+			appData.optionalExpenses[question] = answer;
+		} else {
+			i = i - 1;
+		}
+	}
+}
+
 checkSavings();
+chooseOptExpenses();
+detectLevel();
 
 console.log(appData);
